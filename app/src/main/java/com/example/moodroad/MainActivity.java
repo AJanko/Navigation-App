@@ -145,6 +145,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         geocoderCompletion.setVisibility(invisible);
     }
 
+    //for now string but will be LatLng type
+    public void calculateFinalRoad(ArrayList additionalPlacesList) {
+        //add additionalplaces from additionalplaceslist to currentroute and call navigationlauncher
+
+        for(int i = 0; i< additionalPlacesList.size(); i++) {
+            Log.i(TAG, "this is: "+additionalPlacesList.get(i));
+        }
+
+        //            NavigationLauncherOptions options = NavigationLauncherOptions.builder()
+//                    .directionsRoute(currentRoute)
+//                    .shouldSimulateRoute(false)
+//                    .build();
+//            NavigationLauncher.startNavigation(MainActivity.this, options);
+    }
+
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;

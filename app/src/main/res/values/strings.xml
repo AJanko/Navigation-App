@@ -7,4 +7,5 @@
     <string name="input_destination">Input destination</string>
     <string name="add_point">Input another destination point</string>
     <string name="choose_destination">Choose destination</string>
+    <string name="ok">Ok</string>
 </resources>

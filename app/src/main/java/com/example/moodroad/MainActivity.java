@@ -137,6 +137,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+    public void changeVisibility(int invisible) {
+
+        startNavigation.setVisibility(invisible);
+        mapView.setVisibility(invisible);
+        humourSuggest.setVisibility(invisible);
+        geocoderCompletion.setVisibility(invisible);
+    }
+
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;

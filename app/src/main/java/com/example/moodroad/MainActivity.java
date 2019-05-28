@@ -5,12 +5,16 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
@@ -36,6 +40,7 @@ import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -116,13 +121,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         startNavigation = findViewById(R.id.startButton);
         startNavigation.setOnClickListener(v -> {
 
+            changeVisibility(View.INVISIBLE);
 
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-            NavigationLauncherOptions options = NavigationLauncherOptions.builder()
-                    .directionsRoute(currentRoute)
-                    .shouldSimulateRoute(false)
-                    .build();
-            NavigationLauncher.startNavigation(MainActivity.this, options);
+            Fragment placesFragment = new PlacesFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putStringArray("mood", actualMoods);
+            placesFragment.setArguments(bundle);
+
+            transaction.replace(R.id.placesSuggestFrameLayout, placesFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
     }
 

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Mood Road</string>
     <string name="access_token">pk.eyJ1IjoiZmxlY3plciIsImEiOiJjanM2bnM0M3YwYnliNDVwOG1lN3d4OXF0In0.6Wxd6uDFro9KsTsQcD4pZA</string>
+    <string name="GOOGLE_API_KEY">AIzaSyDrjxtrrPkQEQeYjNBH3CrDKlLcAiROp3Y</string>
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
     <string name="start_navigation">Start navigation</string>

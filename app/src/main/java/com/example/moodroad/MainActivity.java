@@ -138,8 +138,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void calculateFinalRoad(ArrayList additionalPlacesList) {
         //add additionalplaces from additionalplaceslist to currentroute and call navigationlauncher
 
-        for(int i = 0; i< additionalPlacesList.size(); i++) {
-            Log.i(TAG, "this is: "+additionalPlacesList.get(i));
+        if (additionalPlacesList.size() > 0) {
+            for(int i = 0; i< additionalPlacesList.size(); i++) {
+                Timber.d("this is: "+additionalPlacesList.get(i));
+            }
         }
 
         //            NavigationLauncherOptions options = NavigationLauncherOptions.builder()
@@ -204,12 +206,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
 // You can get the generic HTTP info about the response
-                        Log.d(TAG, "Response code: " + response.code());
+                        Timber.d("Response code: " + response.code());
                         if (response.body() == null) {
-                            Log.e(TAG, "No routes found, make sure you set the right user and access token.");
+                            Timber.e("No routes found, make sure you set the right user and access token.");
                             return;
                         } else if (response.body().routes().size() < 1) {
-                            Log.e(TAG, "No routes found");
+                            Timber.e("No routes found");
                             return;
                         }
 
@@ -221,12 +223,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         } else {
                             navigationMapRoute = new NavigationMapRoute(null, mapView, mapboxMap, R.style.NavigationMapRoute);
                         }
+                        Timber.d(currentRoute+"");
                         navigationMapRoute.addRoute(currentRoute);
                     }
 
                     @Override
                     public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-                        Log.e(TAG, "Error: " + throwable.getMessage());
+                        Timber.e("Error: " + throwable.getMessage());
                     }
                 });
     }

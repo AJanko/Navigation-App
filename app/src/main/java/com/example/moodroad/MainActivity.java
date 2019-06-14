@@ -123,22 +123,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
         startNavigation = findViewById(R.id.startButton);
-        startNavigation.setOnClickListener(v -> {
-
-            changeVisibility(View.INVISIBLE);
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            Fragment placesFragment = new PlacesFragment();
-
-            Bundle bundle = new Bundle();
-            bundle.putStringArray("mood", actualMoods);
-            placesFragment.setArguments(bundle);
-
-            transaction.replace(R.id.placesSuggestFrameLayout, placesFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        });
+        startNavigation.setOnClickListener(this::navigationStartOnClickListener);
     }
 
     public void changeVisibility(int invisible) {
@@ -333,7 +318,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         String log = " ";
         for (String anArray : array) log += anArray + ' ';
-        Log.i("inputs", log);
         return log;
+    }
+
+    private void navigationStartOnClickListener(View v) {
+        if (actualMoods.length > 0) {
+            changeVisibility(View.INVISIBLE);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            Fragment placesFragment = new PlacesFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putStringArray("mood", actualMoods);
+            placesFragment.setArguments(bundle);
+
+            transaction.replace(R.id.placesSuggestFrameLayout, placesFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else {
+            calculateFinalRoad(new ArrayList());
+        }
     }
 }
